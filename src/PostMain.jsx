@@ -2,11 +2,28 @@ import { useEffect, useRef, useState } from "react";
 import { Icon } from "@iconify/react";
 import "./PostMain.css";
 import video from "./123.mp4";
+import subtitles from "./subtitles.json";
 
 const PostMain = () => {
   const videoRef = useRef(null);
   const [isMuted, setIsMuted] = useState(true);
   const [isPaused, setIsPaused] = useState(true);
+  const [currentSubtitle, setCurrentSubtitle] = useState(null);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const video = videoRef.current;
+      if (!video) return;
+
+      const currentTime = video.currentTime;
+      const active = subtitles.find(
+        (s) => currentTime >= s.start && currentTime <= s.end
+      );
+      setCurrentSubtitle(active || null);
+    }, 200);
+
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     const target = document.getElementById("PostMain-video");
@@ -54,7 +71,7 @@ const PostMain = () => {
     if (!video) return;
 
     if (video.paused) {
-      video.play().catch(() => {});
+      video.play().catch(() => { });
       setIsPaused(false);
     } else {
       video.pause();
@@ -70,8 +87,43 @@ const PostMain = () => {
     setIsMuted(video.muted);
   };
 
+  const handleAction = (action) => {
+    if (!action) return;
+  
+    try {
+      // безопасный парсинг — можно заменить на switch
+      const fn = action.split("(")[0];
+      const param = action.match(/'(.*?)'/)?.[1];
+  
+      if (fn === "alert") {
+        alert(param);
+      } else if (fn === "log") {
+        console.log(param);
+      }
+      // добавь свои функции здесь
+    } catch (e) {
+      console.error("Invalid action", action);
+    }
+  };
+
   return (
     <div id="PostMain-video" className="post-container">
+
+
+      {currentSubtitle && (
+        <div className="custom-subtitles">
+          {currentSubtitle.text.map((wordObj, idx) => (
+            <span
+            key={idx}
+            onClick={() => handleAction(wordObj.action)}
+            className={wordObj.action ? "clickable-word" : ""}
+          >
+            {wordObj.word}&nbsp;
+          </span>
+          ))}
+        </div>
+      )}
+
       <video
         ref={videoRef}
         loop

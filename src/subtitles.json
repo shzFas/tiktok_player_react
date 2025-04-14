@@ -1,0 +1,24 @@
+[
+    {
+      "start": 0,
+      "end": 3,
+      "text": [
+        { "word": "123", "action": "showWord('123')" },
+        { "word": "123", "action": "showWord('123')" },
+        { "word": "123", "action": "openModal('123')" }
+      ]
+    },
+    {
+      "start": 3.5,
+      "end": 6,
+      "text": [
+        { "word": "123", "action": "showWord('123')" },
+        { "word": "123", "action": null },
+        { "word": "123", "action": "openModal('123')" },
+        { "word": "123", "action": null },
+        { "word": "123", "action": null },
+        { "word": "123", "action": "alert('123')" }
+      ]
+    }
+  ]
+  

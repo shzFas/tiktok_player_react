@@ -131,4 +131,24 @@
     align-items: center;
     justify-content: center;
   }
+
+  .custom-subtitles {
+    position: absolute;
+    bottom: 80px;
+    left: 16px;
+    right: 16px;
+    color: white;
+    font-size: 16px;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 8px 12px;
+    border-radius: 8px;
+    z-index: 20;
+    line-height: 1.5;
+  }
+  
+  .clickable-word {
+    cursor: pointer;
+    color: #ffe600;
+    text-decoration: underline;
+  }
   
