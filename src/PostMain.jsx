@@ -89,12 +89,12 @@ const PostMain = () => {
 
   const handleAction = (action) => {
     if (!action) return;
-  
+
     try {
       // безопасный парсинг — можно заменить на switch
       const fn = action.split("(")[0];
       const param = action.match(/'(.*?)'/)?.[1];
-  
+
       if (fn === "alert") {
         alert(param);
       } else if (fn === "log") {
@@ -107,76 +107,77 @@ const PostMain = () => {
   };
 
   return (
-    <div id="PostMain-video" className="post-container">
+    <>
+      <div id="PostMain-video" className="post-container">
 
-
-      {currentSubtitle && (
-        <div className="custom-subtitles">
-          {currentSubtitle.text.map((wordObj, idx) => (
-            <span
-            key={idx}
-            onClick={() => handleAction(wordObj.action)}
-            className={wordObj.action ? "clickable-word" : ""}
-          >
-            {wordObj.word}&nbsp;
-          </span>
-          ))}
-        </div>
-      )}
-
-      <video
-        ref={videoRef}
-        loop
-        muted={isMuted}
-        className="post-video"
-        src={video}
-        onClick={togglePlay}
-      />
-
-      {/* Кнопка звука */}
-      <button className="volume-button" onClick={toggleMute}>
-        <Icon
-          icon={isMuted ? "mdi:volume-off" : "mdi:volume-high"}
-          width="24"
-          color="#fff"
-        />
-      </button>
-
-      {/* Правая панель */}
-      <div className="post-sidebar">
-        <div className="avatar-section">
-          <div className="avatar">
-            <img src="https://i.pravatar.cc/100" alt="avatar" />
+        {currentSubtitle && (
+          <div className="custom-subtitles">
+            {currentSubtitle.text.map((wordObj, idx) => (
+              <span
+                key={idx}
+                onClick={() => handleAction(wordObj.action)}
+                className={wordObj.action ? "clickable-word" : ""}
+              >
+                {wordObj.word}&nbsp;
+              </span>
+            ))}
           </div>
-          <button className="plus-button">
-            <Icon icon="mdi:plus" width="14" />
-          </button>
+        )}
+
+        <video
+          ref={videoRef}
+          loop
+          muted={isMuted}
+          className="post-video"
+          src={video}
+          onClick={togglePlay}
+        />
+
+        {/* Кнопка звука */}
+        <button className="volume-button" onClick={toggleMute}>
+          <Icon
+            icon={isMuted ? "mdi:volume-off" : "mdi:volume-high"}
+            width="24"
+            color="#fff"
+          />
+        </button>
+
+        {/* Правая панель */}
+        <div className="post-sidebar">
+          <div className="avatar-section">
+            <div className="avatar">
+              <img src="https://i.pravatar.cc/100" alt="avatar" />
+            </div>
+            <button className="plus-button">
+              <Icon icon="mdi:plus" width="14" />
+            </button>
+          </div>
+
+          <div className="sidebar-icon">
+            <Icon icon="mdi:heart" width="28" />
+            <span>15.9K</span>
+          </div>
+          <div className="sidebar-icon">
+            <Icon icon="mdi:comment" width="28" />
+            <span>2738</span>
+          </div>
+          <div className="sidebar-icon">
+            <Icon icon="mdi:share" width="28" />
+            <span>5333</span>
+          </div>
         </div>
 
-        <div className="sidebar-icon">
-          <Icon icon="mdi:heart" width="28" />
-          <span>15.9K</span>
-        </div>
-        <div className="sidebar-icon">
-          <Icon icon="mdi:comment" width="28" />
-          <span>2738</span>
-        </div>
-        <div className="sidebar-icon">
-          <Icon icon="mdi:share" width="28" />
-          <span>5333</span>
+        {/* Подпись */}
+        <div className="post-footer">
+          <div className="username">deyzigucci</div>
+          <div className="caption">А ну ка интересно почитать ваш опыт ...</div>
+          <div className="music">
+            <Icon icon="mdi:music" width="16" />
+            <span>Dark Thoughts - Lil Tecca</span>
+          </div>
         </div>
       </div>
-
-      {/* Подпись */}
-      <div className="post-footer">
-        <div className="username">deyzigucci</div>
-        <div className="caption">А ну ка интересно почитать ваш опыт ...</div>
-        <div className="music">
-          <Icon icon="mdi:music" width="16" />
-          <span>Dark Thoughts - Lil Tecca</span>
-        </div>
-      </div>
-    </div>
+    </>
   );
 };
 

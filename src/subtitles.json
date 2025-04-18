@@ -17,7 +17,7 @@
         { "word": "123", "action": "openModal('123')" },
         { "word": "123", "action": null },
         { "word": "123", "action": null },
-        { "word": "123", "action": "alert('123')" }
+        { "word": "soon", "action": "alert('soon - скоро')" }
       ]
     }
   ]
